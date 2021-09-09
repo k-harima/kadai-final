@@ -1,2 +1,29 @@
-<h1>Items#new</h1>
-<p>Find me in app/views/items/new.html.erb</p>
+<div class="text-center">
+  <h1>商品投稿</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+
+    <%= form_with(model: @item) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+
+      <div class="mb-3">
+        <%= f.label :name, '商品名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :company, '制作会社' %>
+        <%= f.text_field :company, class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :price, '値段' %>
+        <%= f.number_field :price, class: 'form-control' %>
+      </div>
+
+      <%= f.submit '投稿', class: 'btn btn-primary w-100' %>
+    <% end %>
+  </div>
+</div>

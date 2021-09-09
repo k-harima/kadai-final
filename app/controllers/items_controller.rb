@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
     else
       @pagy, @items = pagy(current_user.items.order(id: :desc))
       flash.now[:danger] = '商品の投稿に失敗しました。'
-      render 'toppages/index'
+      render 'items/new'
     end
   end
 
