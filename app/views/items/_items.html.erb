@@ -12,10 +12,19 @@
             <p>製造会社：<%= item.company %></p>
             <p>値段：¥<%= item.price %></p>
           </div>
-          <div>
-            <% if current_user == item.user %>
-              <%= link_to "削除", item, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
-            <% end %>
+          <div class="row">
+            <div class="col-3">
+              <div class="form-group"> 
+                <% if current_user == item.user %>
+                  <%= link_to "削除", item, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group"> 
+                <%= render 'favorites/favorite_button', item: item %>
+              </div>
+            </div>
           </div>
         </div>
       </li>

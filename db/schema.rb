@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_09_161512) do
+ActiveRecord::Schema.define(version: 2021_09_10_080119) do
+
+  create_table "favorites", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_favorites_on_item_id"
+    t.index ["user_id", "item_id"], name: "index_favorites_on_user_id_and_item_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
 
   create_table "items", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -40,6 +50,8 @@ ActiveRecord::Schema.define(version: 2021_09_09_161512) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "favorites", "items"
+  add_foreign_key "favorites", "users"
   add_foreign_key "items", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
