@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_10_080119) do
+ActiveRecord::Schema.define(version: 2021_09_10_164344) do
 
   create_table "favorites", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -42,6 +42,19 @@ ActiveRecord::Schema.define(version: 2021_09_10_080119) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
+  create_table "reviews", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.integer "score"
+    t.string "title"
+    t.text "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_reviews_on_item_id"
+    t.index ["user_id", "item_id"], name: "index_reviews_on_user_id_and_item_id", unique: true
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -55,4 +68,6 @@ ActiveRecord::Schema.define(version: 2021_09_10_080119) do
   add_foreign_key "items", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
+  add_foreign_key "reviews", "items"
+  add_foreign_key "reviews", "users"
 end

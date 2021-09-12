@@ -1,0 +1,36 @@
+<div class="text-center">
+  <h1>レビュー</h1>
+</div>
+
+<%= p @item_id %>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+
+    <%= form_with(model: @review) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      
+      <div class="mb-3">
+        <%= f.label :item_id, '商品ID' %>
+        <%= f.select :item_id, [[@item_id, @item_id]], class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :score, '総合点（1~5点）' %>
+        <%= f.select :score, [[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :title, 'タイトル' %>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :text, 'レビュー' %>
+        <%= f.text_area :text, class: 'form-control' %>
+      </div>
+
+      <%= f.submit '登録', class: 'btn btn-secondary w-100' %>
+    <% end %>
+  </div>
+</div>

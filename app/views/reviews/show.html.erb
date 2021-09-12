@@ -1,0 +1,29 @@
+<div class="text-center">
+  <h1>レビュー内容</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <table class="table table-bordered">
+      <tr>
+        <th>投稿者</th>
+        <td><%= link_to @user.name, user_path(@review.user_id) %></td>
+      </tr>
+      <tr>
+        <th>総合点</th>
+        <td><%= @review.score %></td>
+      </tr>
+      <tr>
+        <th>タイトル</th>
+        <td><%= @review.title %></td>
+      </tr>
+      <tr>
+        <th>レビュー</th>
+        <td><%= @review.text %></td>
+      </tr>
+    </table>
+    <div class="mb-3 text-center">
+      <%= link_to "戻る", root_path, class: 'btn btn-secondary' %>
+    </div>
+  </div>
+</div>    

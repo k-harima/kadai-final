@@ -14,7 +14,12 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :items, only: [:show, :new, :create, :destroy]
+  resources :items, only: [:show, :new, :create, :destroy] do
+    member do
+      get :new_reviews
+    end
+  end
   resources :relationships, only: [:create, :destroy]
   resources :favorites, only: [:create, :destroy]
+  resources :reviews, only: [:show, :create, :destroy]
 end

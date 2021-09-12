@@ -28,6 +28,11 @@ class ItemsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
   
+  def new_reviews
+    @review = Review.new
+    @item_id = params[:id]
+  end
+  
   private
 
   def item_params
