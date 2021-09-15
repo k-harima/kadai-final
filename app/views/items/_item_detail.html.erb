@@ -1,0 +1,30 @@
+<div class="text-center">
+  <h1>商品詳細</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <%= image_tag item.picture.url, :size => '200x200' if item.picture? %>
+    <table class="table table-bordered">
+      <tr>
+        <th>投稿者</th>
+        <td><%= link_to user.name, user_path(item.user_id) %></td>
+      </tr>
+      <tr>
+        <th>商品名</th>
+        <td><%= link_to item.name, item_path(item) %></td>
+      </tr>
+      <tr>
+        <th>制作会社</th>
+        <td><%= item.company %></td>
+      </tr>
+      <tr>
+        <th>値段</th>
+        <td><%= item.price %></td>
+      </tr>
+    </table>
+    <div class="mb-3 text-center">
+      <a href="<%= new_reviews_item_path(params[:id]) %>" class="btn btn-secondary">レビューする </a>
+    </div>
+  </div>
+</div>    

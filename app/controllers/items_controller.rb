@@ -3,6 +3,9 @@ class ItemsController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def show
+    @item = Item.find(params[:id])
+    @user = User.find(@item.user_id)
+    @pagy, @reviews = pagy(@item.reviews.order(id: :desc))
   end
 
   def new
@@ -29,14 +32,24 @@ class ItemsController < ApplicationController
   end
   
   def new_reviews
+    @item = Item.find(params[:id])
+    @user = User.find(@item.user_id)
     @review = Review.new
     @item_id = params[:id]
+  end
+  
+  def search
+    if params[:name].present?
+      @pagy,@searchs = pagy(Item.where('name LIKE ?', "%#{params[:name]}%").order(id: :desc))
+    else
+      @searchs = Item.none
+    end
   end
   
   private
 
   def item_params
-    params.require(:item).permit(:name, :company, :price)
+    params.require(:item).permit(:name, :company, :price, :picture)
   end
 
   def correct_user

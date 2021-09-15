@@ -1,6 +1,18 @@
-<% if items.any? %>
+<h1 class="text-center">商品一覧</h1>
+<div class="row">
+  <div class="col-sm-6 offset-sm-5">
+    <div class="mb-3">
+      <%= form_with url: search_items_path, method: :get, local: true do |f| %>
+        <%= f.text_field :name %>
+        <%= f.submit '検索' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% if @searchs.any? %>
   <ul class="list-unstyled mt-2">
-    <% items.each do |item| %>
+    <p class="text-center"><%= p @searchs.count %>件ヒットしました。</p>
+    <% @searchs.each do |item| %>
       <li class="d-flex justify-content-center">
         <%= image_tag item.picture.url, :size => '150x100' if item.picture? %>
         <div>

@@ -22,6 +22,11 @@
         <%= f.label :price, '値段' %>
         <%= f.number_field :price, class: 'form-control' %>
       </div>
+      
+      <div class="mb-3">
+        <%= f.label :picture, '商品画像選択' %>
+        <%= f.file_field :picture, class: 'form-control' %>
+      </div>
 
       <%= f.submit '投稿', class: 'btn btn-primary w-100' %>
     <% end %>
