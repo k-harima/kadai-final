@@ -49,7 +49,9 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: mutenka_production
   username: mutenka
   password: <%= ENV['MUTENKA_DATABASE_PASSWORD'] %>
