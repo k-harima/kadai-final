@@ -1,8 +1,8 @@
 class Item < ApplicationRecord
   belongs_to :user
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :likers, through: :favorites, source: :user
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :reviewers, through: :reviews, source: :user
   
   mount_uploader :picture, PictureUploader
