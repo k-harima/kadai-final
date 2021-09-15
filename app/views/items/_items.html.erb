@@ -2,7 +2,7 @@
   <ul class="list-unstyled mt-2">
     <% items.each do |item| %>
       <li class="d-flex justify-content-center">
-        <%= image_tag item.picture.url, :size => '150x100' if item.picture? %>
+        <%= image_tag item.picture.url, :size => '150x100', :alt => 'Photo' if item.picture? %>
         <div>
           <div>
             <%= link_to item.user.name, user_path(item.user), class: "text-decoration-none" %> <span class="text-muted">posted at <%= item.created_at %></span>

@@ -10,11 +10,13 @@
   </div>
 </div>
 <% if @searchs.any? %>
+  <div class="text-center">
+    <p><%= p @searchs.count %>件ヒットしました。</p>
+  </div>
   <ul class="list-unstyled mt-2">
-    <p class="text-center"><%= p @searchs.count %>件ヒットしました。</p>
     <% @searchs.each do |item| %>
       <li class="d-flex justify-content-center">
-        <%= image_tag item.picture.url, :size => '150x100' if item.picture? %>
+        <%= image_tag item.picture.url, :size => '150x100', :alt => 'Photo' if item.picture? %>
         <div>
           <div>
             <%= link_to item.user.name, user_path(item.user), class: "text-decoration-none" %> <span class="text-muted">posted at <%= item.created_at %></span>
