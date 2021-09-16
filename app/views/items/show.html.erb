@@ -12,7 +12,7 @@
       <h1 class="text-center">レビュー一覧</h1>
       <ul class="list-unstyled mt-2">
         <% @reviews.each do |review| %>
-          <li class="d-flex justify-content-center">
+          <li class="d-flex justify-content-left">
             <img class="rounded me-2 mb-5" src="<%= gravatar_url(review.user, { size: 100 }) %>" alt="">
             <div>
               <div>

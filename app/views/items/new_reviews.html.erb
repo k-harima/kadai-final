@@ -10,8 +10,7 @@
       <%= render 'layouts/error_messages', model: f.object %>
       
       <div class="mb-3">
-        <%= f.label :item_id, '商品ID' %>
-        <%= f.select :item_id, [[@item_id, @item_id]], class: 'form-control' %>
+        <%= f.hidden_field :item_id, :value => @item_id, class: 'form-control' %>
       </div>
 
       <div class="mb-3">
