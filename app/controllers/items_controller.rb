@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :require_user_logged_in
   before_action :correct_user, only: [:destroy]
+  before_action :already_item_review?, only: [:new_reviews]
   
   def show
     @item = Item.find(params[:id])
@@ -55,6 +56,13 @@ class ItemsController < ApplicationController
   def correct_user
     @item = current_user.items.find_by(id: params[:id])
     unless @item
+      redirect_to root_url
+    end
+  end
+  
+  def already_item_review?
+    @already_item = current_user.reviews.find_by(item_id: params[:id])
+    if @already_item
       redirect_to root_url
     end
   end
