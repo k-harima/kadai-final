@@ -1,6 +1,11 @@
 <div class="row">
   <aside class="col-sm-4">
     <%= render 'items/item_detail', item: @item, user: @item_user  %>
+    <div class="mb-3 text-center">
+      <% unless current_user.reviewing?(@item) %>
+        <a href="<%= new_reviews_item_path(@item) %>" class="btn btn-secondary">レビューする </a>
+      <% end %>
+    </div>
   </aside>
   <div class="col-sm-8">
     <div class="text-center">

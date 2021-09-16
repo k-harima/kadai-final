@@ -44,7 +44,7 @@ class User < ApplicationRecord
     self.likings.include?(item)
   end
   
-    def reviewing?(other_item)
+  def reviewing?(other_item)
     self.reviewings.include?(other_item)
   end
 end
