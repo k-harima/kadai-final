@@ -1,22 +1,32 @@
 class ReviewsController < ApplicationController
   before_action :require_user_logged_in
   before_action :correct_user, only: [:destroy]
+  before_action :already_item_review?, only: [:new, :create]
   
   def show
     @review = Review.find(params[:id])
     @user = User.find_by(id: @review.user_id)
-    @item = Item.find_by(id: @review.item_id)
+    @item = Item.find_by(id: params[:item_id])
     @item_user = User.find_by(id: @item.user_id)
+  end
+  
+  def new
+    @item = Item.find_by(id: params[:item_id])
+    @user = User.find_by(id: @item.user_id)
+    @review = @item.reviews.build()
+    @item_id = params[:item_id]
   end
 
   def create
-    @review = Review.new(review_params)
+    @item = Item.find_by(id: params[:item_id])
+    @user = User.find_by(id: @item.user_id)
+    @review = @item.reviews.build(review_params)
     if @review.save
       flash[:success] = 'レビューを投稿しました。'
-      redirect_to review_path(@review)
+      redirect_to item_review_path(@item, @review)
     else
-      flash[:danger] = 'レビューの投稿に失敗しました。内容に不備があるのでご確認ください。<br>・すべてのフォームに入力してください<br>・タイトルは20文字以内に収めてください。<br>・レビューは500文字以内に収めてください。'
-      redirect_to new_reviews_item_path(id: review_params[:item_id])
+      flash.now[:danger] = 'レビューの投稿に失敗しました'
+      render :new
     end 
   end
 
@@ -30,12 +40,19 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:score, :title, :text, :item_id).merge(user_id: current_user.id)
+    params.require(:review).permit(:score, :title, :text).merge(user_id: current_user.id)
   end
   
   def correct_user
     @correct_review = current_user.reviews.find_by(id: params[:id])
     unless @correct_review
+      redirect_to root_url
+    end
+  end
+  
+  def already_item_review?
+    @already_item = current_user.reviews.find_by(item_id: params[:item_id])
+    if @already_item
       redirect_to root_url
     end
   end
